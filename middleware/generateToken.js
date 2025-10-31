@@ -7,16 +7,10 @@ export const generateToken = (res, user,message) => {
   });
 
   return res
-    .status(200)
-    .cookie("token", token, {
-      httpOnly: true,
-      secure: 'strict',
-      sameSite: "None",
-      maxAge: 24 * 60 * 60 * 1000, 
-    }).json({
+    .status(200).json({
         success:true,
-        cookie,
         message,
+        token,
         user
     });
 };

@@ -1,5 +1,6 @@
-import { generateToken } from "../middleware/isAuthentication";
+import { generateToken } from "../middleware/generateToken.js";
 import {User} from "../models/user.model.js"
+
 import bcrypt from "bcryptjs";
 
 export const SignUp =async(req,res)=>{
@@ -54,7 +55,8 @@ export const Login =async(req,res)=>{
                 message:"Incorrect Password"
             });
         }
-    generateToken(res, data, `Welcome back ${data.name}`);
+
+        return generateToken(res, data, `Welcome back ${data.name}`);
 
     
     } catch (error) {
