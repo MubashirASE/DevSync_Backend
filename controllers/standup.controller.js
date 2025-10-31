@@ -80,3 +80,21 @@ export const getStandupDate = async (req, res) => {
     });
   }
 };
+export const getAllStandupData= async (req, res) => {
+  try {
+
+    const standup= await StandUp.find().populate("userId", "name email");
+    
+    return res.json({
+      success: true,
+      data: standup
+    });
+
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      message: "Date search failed!"
+    });
+  }
+};
