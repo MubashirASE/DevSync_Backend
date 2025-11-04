@@ -8,6 +8,7 @@ export const submitStandup = async (req, res) => {
     console.log(userId)
     console.log(yesterday,today,blockers)
     const startOfDay = new Date();
+    console.log(startOfDay)
     startOfDay.setHours(0, 0, 0, 0);
 
     const existingEntry = await StandUp.findOne({
@@ -67,6 +68,24 @@ export const getStandupDate = async (req, res) => {
       createdAt: { $gte: start, $lte: end }
     }).populate("userId", "name email");
 
+    return res.json({
+      success: true,
+      data: standup
+    });
+
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      message: "Date search failed!"
+    });
+  }
+};
+export const getAllStandupData= async (req, res) => {
+  try {
+
+    const standup= await StandUp.find().populate("userId", "name email");
+    console.log(standup)
     return res.json({
       success: true,
       data: standup

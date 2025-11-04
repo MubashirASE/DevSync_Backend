@@ -1,11 +1,12 @@
 import express from "express"
-import { getStandupDate, submitStandup } from "../controllers/standup.controller.js"
+import { getAllStandupData, getStandupDate, submitStandup } from "../controllers/standup.controller.js"
 import { isAuthentication } from "../middleware/isAuthenticated.js"
 
 const router=express.Router()
 
-router.post("/addStandupData",isAuthentication,submitStandup)
-router.get("/date",getStandupDate)
+router.post("/addStandup",isAuthentication,submitStandup)
+router.get("/date",isAuthentication,getStandupDate)
+router.get("/allData",isAuthentication,getAllStandupData)
 
 
 export default router

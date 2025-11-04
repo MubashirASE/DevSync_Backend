@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 
 export const SignUp =async(req,res)=>{
     try {
-        console.log(req.body)
+    console.log(req.body)
     const {name ,email,password,role}=req.body
     console.log(email)
     const data =await User.findOne({email})
@@ -48,15 +48,17 @@ export const Login =async(req,res)=>{
 
         })
     }
-     const isPassword = await bcrypt.compare(password, data.password);
+
+    const isPassword = await bcrypt.compare(password,data.password);
+    console.log(isPassword)
         if(!isPassword){
-            return res.status(400).json({
+            res.json({
                 success:false,
                 message:"Incorrect Password"
             });
         }
-
-        return generateToken(res, data, `Welcome back ${data.name}`);
+   
+    return generateToken(res,data ,`Welcome back ${data.name}`);
 
     
     } catch (error) {
@@ -67,17 +69,21 @@ export const Login =async(req,res)=>{
      })   
     }
 } 
-export const logout = async (_,res) => {
-    try {
-        return res.status(200).cookie("token", "", {maxAge:0}).json({
-            message:"Logged out successfully.",
-            success:true
-        })
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            success:false,
-            message:"Failed to logout"
-        }) 
-    }
-}
+export const getAllUserData= async (req, res) => {
+  try {
+
+    const userData= await User.find().select("-password");
+    console.log(userData)
+    return res.json({
+      success: true,
+      data: userData
+    });
+
+  } catch (error) {
+    console.log(error);
+    return res.json({
+      success: false,
+      message: "User Data failed!"
+    });
+  }
+};
