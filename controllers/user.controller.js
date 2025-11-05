@@ -9,7 +9,6 @@ export const SignUp = async (req, res) => {
 
     const userData = await User.findOne({ email });
 
-    // ✅ First check if email exists
     if (userData) {
       if (userData.name === name) {
         return res.json({
@@ -24,10 +23,8 @@ export const SignUp = async (req, res) => {
       });
     }
 
-    // ✅ Hash password
     const hashPassword = await bcrypt.hash(password, 10);
 
-    // ✅ Create user
     const newUser = await User.create({
       name,
       email,
@@ -35,7 +32,6 @@ export const SignUp = async (req, res) => {
       role,
     });
 
-    // ✅ Generate token with new user data
     return generateToken(res, newUser, `Welcome ${newUser.name}`);
 
   } catch (error) {

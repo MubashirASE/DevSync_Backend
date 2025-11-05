@@ -5,6 +5,7 @@ import connectDB from "./database/db.js";
 import userRouter from "./routes/user.route.js"
 import standupRouter from "./routes/standup.route.js"
 import reviewRouter from "./routes/review.route.js"
+import quickLinkRouter from "./routes/quickLink.route.js"
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(cors({
 app.use("/api/v1/user",userRouter);
 app.use("/api/v1/standup",standupRouter);
 app.use("/api/v1/review",reviewRouter);
+app.use("/api/v1/link",quickLinkRouter);
 
 
 const PORT = process.env.PORT || 4000;
