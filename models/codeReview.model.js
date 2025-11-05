@@ -7,7 +7,7 @@ const reviewSchema = new mongoose.Schema({
    reviewer: { type: String, required: true },
    status:{
     type:String,
-    enum:["Pending","Merge","Reviewer"],
+    enum:["Pending","Reviewer","Merge"],
     default:"Pending"
    },
    isDone:{

@@ -63,17 +63,47 @@ export const allCodeReview=async(req,res)=>{
       })
      }
 }
+export const allReviewer=async(req,res)=>{
+     try {
+      
+      const userData= await Review.find()
+      console.log(userData)
+     return res.json({
+      success: true,
+      data: userData
+    });
+     } catch (error) {
+      console.log(error)
+      res.json({
+         success:false,
+         message:"PR Reviewer Request failed!"
+      })
+     }
+}
 export const updateReview =async(req,res)=>{
-
-        const { status} = req.body;
-        const user=req.userId
-        
-
-        const result = await Review.updateMany({status, isDone});
-        console.log(result)
-            // res.status(200).json({
-            //     message: `${result.matchedCount} documents matched, ${result.modifiedCount} documents modified.`,
-            //     result,
-            // });
+   try{
+      const updateData={}
+      const userData = req.body;
+      console.log(userData)
+      if(userData.status){
+         updateData.status=userData.status
+      }
+      if(userData.isDone){
+         updateData.isDone=userData.isDone
+      }
+      console.log(updateData)
+      const result = await Review.findByIdAndUpdate(userData.id,{$set:updateData},{new:true});
+      console.log("result",result)
+      return res.json({
+      success: true,
+      message:"Status Updated SuccessFully"
+    });
+     } catch (error) {
+      console.log(error)
+      res.json({
+         success:false,
+         message:"PR Reviewer updated failed!"
+      })
+     }   
 
 }
