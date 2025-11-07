@@ -6,4 +6,5 @@ const router=express.Router()
 router.post('/signup',SignUp)
 router.post('/login',Login)
 router.get('/allUserData',getAllUserData)
+
 export default router

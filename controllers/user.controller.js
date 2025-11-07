@@ -1,4 +1,6 @@
 import { generateToken } from "../middleware/generateToken.js";
+import jwt from "jsonwebtoken";
+
 import {User} from "../models/user.model.js"
 
 import bcrypt from "bcryptjs";

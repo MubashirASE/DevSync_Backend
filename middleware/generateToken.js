@@ -7,6 +7,7 @@ export const generateToken = (res, user,message) => {
     expiresIn: "1d",
   });
    const userData={
+        id :user.id,
         name:user.name,
         email:user.email,
         role:user.role
