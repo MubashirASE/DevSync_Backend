@@ -6,7 +6,7 @@ export const addReview=async(req,res)=>{
     const {developerName,prLink,reviewer}=req.body
 
     console.log(developerName,prLink,reviewer)
-
+    
     const createPR=await Review.create({
          developerName,
          prLink,
